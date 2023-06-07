@@ -2,5 +2,14 @@
 
 source "https://rubygems.org"
 
-gem 'rspec', '~> 3.12'
-gem 'pry'
+group :development do
+  gem 'rubocop'
+end
+
+group :test do
+  gem 'rspec', '~> 3.12'
+end
+
+group :test, :development do
+  gem 'pry'
+end
