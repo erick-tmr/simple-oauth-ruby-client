@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        - RUBY_VERSION=$RUBY_VERSION
+        - RAILS_USER=$RAILS_USER
+        - GEM_HOME=$GEM_HOME
+    volumes:
+      - .:/app
+      - gems:$GEM_HOME
+    ports:
+      - "3000:3000"
+    env_file:
+      - ".env"
+
+volumes:
+  gems:
