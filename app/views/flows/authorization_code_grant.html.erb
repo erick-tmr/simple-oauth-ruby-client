@@ -1,0 +1,73 @@
+<main class="px-3 container">
+  <h1>Google OAuth Flow</h1>
+  <div class="row">
+    <div class="col">
+      <h2>Triggers</h2>
+      <%= link_to('Get Authorization Code', google_code_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <p>Request Content</p>
+      <ul>
+        <li><span class="list-title">authorize_url:</span> https://accounts.google.com/o/oauth2/v2/auth</li>
+        <li><span class="list-title">client_id:</span> ***</li>
+        <li><span class="list-title">redirect_uri:</span> http://localhost:3000/google-callback</li>
+        <li><span class="list-title">response_type:</span> code</li>
+        <li><span class="list-title">scope:</span> https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events.readonly</li>
+      </ul>
+      <% if @code %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">code:</span> <%= @code %></li>
+          <li><span class="list-title">scope:</span> <%= @scope %></li>
+        </ul>
+      <% end %>
+      <% if @code %>
+        <%= link_to('Get JWT', google_jwt_path(code: @code), class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% end %>
+      <% if @code || @access_token %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">token_url:</span> https://accounts.google.com/o/oauth2/v2/auth</li>
+          <li><span class="list-title">client_id:</span> ***</li>
+          <li><span class="list-title">client_secret:</span> ***</li>
+          <li><span class="list-title">code:</span> <%= @code %></li>
+          <li><span class="list-title">redirect_uri:</span> http://localhost:3000/google-callback</li>
+          <li><span class="list-title">grant_type:</span> authorization_code</li>
+        </ul>
+      <% end %>
+      <% if @access_token %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">access_token:</span> <%= @access_token %></li>
+          <li><span class="list-title">scope:</span> <%= @scope %></li>
+          <li><span class="list-title">expires_in:</span> <%= @expires_in %></li>
+          <li><span class="list-title">token_type:</span> <%= @token_type %></li>
+        </ul>
+      <% end %>
+      <% if @error %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">error:</span> <%= @error %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+  <h1>Iugu OAuth Flow</h1>
+  <div class="row">
+    <div class="col">
+      <h2>Triggers</h2>
+      <%= link_to('Get Authorization Code', iugu_code_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <p>Request Content</p>
+      <ul>
+        <li><span class="list-title">authorize_url:</span> http://identity.iugu.test/authorize</li>
+        <li><span class="list-title">client_id:</span> 3P8tpjdNMGRz1UQrfsVhZ7</li>
+        <li><span class="list-title">redirect_uri:</span> http://localhost:3000/iugu-callback</li>
+        <li><span class="list-title">response_type:</span> code</li>
+      </ul>
+      <% if params[:iugu] %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">code:</span> <%= @code %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</main>
