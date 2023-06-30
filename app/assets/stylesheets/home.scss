@@ -1,0 +1,11 @@
+.cover-container {
+  max-width: 42em;
+  height: 100%;
+}
+
+.btn-light,
+.btn-light:hover,
+.btn-light:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}

@@ -42,10 +42,14 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+gem 'faraday', '~> 2.7', '>= 2.7.4'
+gem 'faraday-httpclient', '~> 2.0', '>= 2.0.1'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'pry'
+  gem 'dotenv-rails'
 end
 
 group :test do
