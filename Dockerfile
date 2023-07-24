@@ -26,6 +26,7 @@ ENV LANG C.UTF-8
 RUN apk add --no-cache --update \
       tzdata \
       git \
+      postgresql-dev \
     && rm -rf /var/cache/apk/*
 
 # Start building a new image called "dependencies"

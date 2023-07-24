@@ -1,0 +1,2 @@
+class AuthCodeFlow < ApplicationRecord
+end
