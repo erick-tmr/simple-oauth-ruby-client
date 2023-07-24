@@ -1,4 +1,48 @@
 <main class="px-3 container">
+  <h1>Iugu OAuth Flow</h1>
+  <div class="row">
+    <div class="col">
+      <h2>Triggers</h2>
+      <%= link_to('Get Authorization Code', iugu_code_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% unless @auth_code_flow&.code %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">authorize_url:</span> http://identity.iugu.test/authorize</li>
+          <li><span class="list-title">client_id:</span> 3P8tpjdNMGRz1UQrfsVhZ7</li>
+          <li><span class="list-title">redirect_uri:</span> http://localhost:3000/iugu-callback</li>
+          <li><span class="list-title">response_type:</span> code</li>
+        </ul>
+      <% end %>
+      <% if @auth_code_flow&.code %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">code:</span> <%= @auth_code_flow&.code %></li>
+        </ul>
+      <% end %>
+      <% if @auth_code_flow&.code %>
+        <%= link_to('Get JWT', iugu_jwt_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% end %>
+      <% if @auth_code_flow&.code %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">token_url:</span> https://identity.iugu.test/token</li>
+          <li><span class="list-title">client_id:</span> ***</li>
+          <li><span class="list-title">client_secret:</span> ***</li>
+          <li><span class="list-title">code:</span> <%= @auth_code_flow&.code %></li>
+          <li><span class="list-title">redirect_uri:</span> http://localhost:3000/google-callback</li>
+          <li><span class="list-title">grant_type:</span> authorization_code</li>
+        </ul>
+      <% end %>
+      <% if @auth_code_flow&.access_token %>
+        <p>Response Content</p>
+        <ul>
+          <li><span class="list-title">access_token:</span> <%= @auth_code_flow.access_token %></li>
+          <li><span class="list-title">id_token:</span> <%= @auth_code_flow.id_token %></li>
+          <li><span class="list-title">expires_in:</span> <%= @auth_code_flow.expires_in %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
   <h1>Google OAuth Flow</h1>
   <div class="row">
     <div class="col">
@@ -50,24 +94,6 @@
       <% end %>
     </div>
   </div>
-  <h1>Iugu OAuth Flow</h1>
-  <div class="row">
-    <div class="col">
-      <h2>Triggers</h2>
-      <%= link_to('Get Authorization Code', iugu_code_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
-      <p>Request Content</p>
-      <ul>
-        <li><span class="list-title">authorize_url:</span> http://identity.iugu.test/authorize</li>
-        <li><span class="list-title">client_id:</span> 3P8tpjdNMGRz1UQrfsVhZ7</li>
-        <li><span class="list-title">redirect_uri:</span> http://localhost:3000/iugu-callback</li>
-        <li><span class="list-title">response_type:</span> code</li>
-      </ul>
-      <% if params[:iugu] %>
-        <p>Response Content</p>
-        <ul>
-          <li><span class="list-title">code:</span> <%= @code %></li>
-        </ul>
-      <% end %>
-    </div>
-  </div>
+
+  <%= link_to('Clear Session', clear_session_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
 </main>

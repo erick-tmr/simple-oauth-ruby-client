@@ -10,5 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_202136) do
+  create_table "auth_code_flows", force: :cascade do |t|
+    t.text "issuer"
+    t.text "client_id"
+    t.text "code"
+    t.text "access_token"
+    t.text "id_token"
+    t.text "auth_code_req_url"
+    t.text "token_req_url"
+    t.integer "expires_in"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

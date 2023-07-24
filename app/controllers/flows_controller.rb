@@ -2,10 +2,12 @@
 
 class FlowsController < ApplicationController
   def authorization_code_grant
-    @code = params[:code]
-    @scope = params[:scope]
-    @access_token = params[:access_token]
-    @expires_in = params[:expires_in]
-    @token_type = params[:token_type]
+    @auth_code_flow = AuthCodeFlow.find(session[:auth_code_flow_id]) if session[:auth_code_flow_id]
+  end
+
+  def clear_session
+    session.delete(:auth_code_flow_id)
+
+    render :authorization_code_grant
   end
 end
