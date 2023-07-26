@@ -3,12 +3,14 @@
 class IuguController < ApplicationController
   IUGU_OAUTH_URL = 'https://identity.iugu.test/authorize'
   IUGU_TOKEN_URL = 'https://identity.iugu.test/token'
+  CALLBACK_URL = 'http://localhost:3000/iugu-callback'
 
   def code
     body = {
       client_id: ENV['IUGU_CLIENT_ID'],
-      redirect_uri: 'http://localhost:3000/iugu-callback',
-      response_type: 'code'
+      redirect_uri: CALLBACK_URL,
+      response_type: 'code',
+      state: 'my-secret'
     }
 
     uri = URI(IUGU_OAUTH_URL)
@@ -36,18 +38,16 @@ class IuguController < ApplicationController
 
   def jwt
     auth_code_flow = AuthCodeFlow.find(session[:auth_code_flow_id])
-
-    body = {
-      code: auth_code_flow.code,
-      redirect_uri: 'http://localhost:3000/iugu-callback',
-      grant_type: 'authorization_code',
-      audience: 'Iugu.Platform.ok'
-    }
-
     conn = Faraday.new(IUGU_TOKEN_URL) do |f|
       f.request :authorization, :basic, ENV['IUGU_CLIENT_ID'], ENV['IUGU_CLIENT_SECRET']
       f.request :url_encoded
     end
+    body = {
+      code: auth_code_flow.code,
+      redirect_uri: CALLBACK_URL,
+      grant_type: 'authorization_code'
+      # audience: 'Iugu.Platform.ok'
+    }
 
     response = conn.post('', body)
     parsed_response = JSON.parse(response.body)

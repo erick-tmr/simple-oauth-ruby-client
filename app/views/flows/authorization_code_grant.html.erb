@@ -7,9 +7,9 @@
       <% unless @auth_code_flow&.code %>
         <p>Request Content</p>
         <ul>
-          <li><span class="list-title">authorize_url:</span> http://identity.iugu.test/authorize</li>
-          <li><span class="list-title">client_id:</span> 3P8tpjdNMGRz1UQrfsVhZ7</li>
-          <li><span class="list-title">redirect_uri:</span> http://localhost:3000/iugu-callback</li>
+          <li><span class="list-title">authorize_url:</span> <%= IuguController::IUGU_OAUTH_URL %></li>
+          <li><span class="list-title">client_id:</span> <%= ENV['IUGU_CLIENT_ID'] %></li>
+          <li><span class="list-title">redirect_uri:</span> <%= IuguController::CALLBACK_URL %></li>
           <li><span class="list-title">response_type:</span> code</li>
         </ul>
       <% end %>
@@ -25,11 +25,11 @@
       <% if @auth_code_flow&.code %>
         <p>Request Content</p>
         <ul>
-          <li><span class="list-title">token_url:</span> https://identity.iugu.test/token</li>
+          <li><span class="list-title">token_url:</span> <%= IuguController::IUGU_TOKEN_URL %></li>
           <li><span class="list-title">client_id:</span> ***</li>
           <li><span class="list-title">client_secret:</span> ***</li>
           <li><span class="list-title">code:</span> <%= @auth_code_flow&.code %></li>
-          <li><span class="list-title">redirect_uri:</span> http://localhost:3000/google-callback</li>
+          <li><span class="list-title">redirect_uri:</span> <%= IuguController::CALLBACK_URL %></li>
           <li><span class="list-title">grant_type:</span> authorization_code</li>
         </ul>
       <% end %>
