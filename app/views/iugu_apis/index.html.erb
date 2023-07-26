@@ -1,0 +1,24 @@
+<main class="px-3 container">
+  <h1>Iugu APIs calls</h1>
+  <div class="row">
+    <div class="col">
+      <h2>Workspaces</h2>
+      <%= link_to('Get /workspaces', iugu_apis_workspaces_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% unless @workspace_response %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">url:</span> https://api.console.iugu.test/workspaces</li>
+          <li><span class="list-title">access_token:</span> <%= @auth_code_flow.access_token %></li>
+        </ul>
+      <% end %>
+      <% if @workspace_response %>
+        <p>Response Content</p>
+        <ul>
+          <% @workspace_response.each do |key, value| %>
+            <li><span class="list-title"><%= key %>:</span> <%= value %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</main>
