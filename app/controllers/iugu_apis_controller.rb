@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class IuguApisController < ApplicationController
-  IUGU_WORKSPACES_URL = 'https://api.console.iugu.test'
+  IUGU_WORKSPACES_URL = 'https://api.console.iugu.com'
 
   def index
     @auth_code_flow = AuthCodeFlow.find(session[:auth_code_flow_id])

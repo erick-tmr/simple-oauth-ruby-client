@@ -14,4 +14,13 @@ Rails.application.routes.draw do
 
   get '/iugu-apis', to: 'iugu_apis#index'
   get '/iugu-apis/workspaces', to: 'iugu_apis#get_workspaces'
+
+  get '/shopify-app-install', to: 'shopify#app_install'
+  get '/shopify-callback', to: 'shopify#callback'
+  get '/shopify-code', to: 'shopify#code'
+  get '/shopify-jwt', to: 'shopify#jwt'
+
+  get '/shopify-apis', to: 'shopify_apis#index'
+  get '/shopify-apis/orders', to: 'shopify_apis#get_orders'
+  get '/shopify-apis/products', to: 'shopify_apis#get_products'
 end
