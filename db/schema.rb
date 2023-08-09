@@ -11,10 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_07_24_202136) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "auth_code_flows", force: :cascade do |t|
     t.text "issuer"
     t.text "client_id"
     t.text "code"
+    t.text "requested_scope"
+    t.text "granted_scope"
     t.text "access_token"
     t.text "id_token"
     t.text "auth_code_req_url"

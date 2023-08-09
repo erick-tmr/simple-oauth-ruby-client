@@ -1,0 +1,14 @@
+<main class="px-3 container">
+  <h1>Shopify App Install</h1>
+  <div class="row">
+    <div class="col">
+      <p>Request Content</p>
+      <ul>
+        <li><span class="list-title">host:</span> <%= @params[:host] %></li>
+        <li><span class="list-title">shop:</span> <%= @params[:shop] %></li>
+        <li><span class="list-title">timestamp:</span> <%= @params[:timestamp] %></li>
+        <li><span class="list-title">HMAC Verified:</span> <%= @verified %></li>
+      </ul>
+    </div>
+  </div>
+</main>

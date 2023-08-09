@@ -3,6 +3,7 @@
 class FlowsController < ApplicationController
   def authorization_code_grant
     @auth_code_flow = AuthCodeFlow.find(session[:auth_code_flow_id]) if session[:auth_code_flow_id]
+    @verified = params[:verified] if params[:verified]
   end
 
   def clear_session

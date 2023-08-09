@@ -1,0 +1,41 @@
+<main class="px-3 container">
+  <h1>Shopify APIs calls</h1>
+  <div class="row">
+    <div class="col">
+      <h2>Orders</h2>
+      <%= link_to('Get /orders', shopify_apis_orders_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% unless @orders_response %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">url:</span> https://{SHOPIFY_SHOP}.myshopify.com/admin/api/2023-07/orders.json</li>
+          <li><span class="list-title">access_token:</span> <%= @auth_code_flow.access_token %></li>
+        </ul>
+      <% end %>
+      <% if @orders_response %>
+        <p>Response Content</p>
+        <pre>
+          <%= JSON.pretty_generate(@orders_response) %>
+        </pre>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Products</h2>
+      <%= link_to('Get /orders', shopify_apis_products_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% unless @products_response %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">url:</span> https://{SHOPIFY_SHOP}.myshopify.com/admin/api/2023-07/orders.json</li>
+          <li><span class="list-title">access_token:</span> <%= @auth_code_flow.access_token %></li>
+        </ul>
+      <% end %>
+      <% if @products_response %>
+        <p>Response Content</p>
+        <pre>
+          <%= JSON.pretty_generate(@products_response) %>
+        </pre>
+      <% end %>
+    </div>
+  </div>
+</main>
