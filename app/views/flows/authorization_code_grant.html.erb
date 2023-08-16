@@ -38,7 +38,21 @@
         <ul>
           <li><span class="list-title">access_token:</span> <%= @auth_code_flow.access_token %></li>
           <li><span class="list-title">id_token:</span> <%= @auth_code_flow.id_token %></li>
+          <li><span class="list-title">refresh_token:</span> <%= @auth_code_flow.refresh_token %></li>
           <li><span class="list-title">expires_in:</span> <%= @auth_code_flow.expires_in %></li>
+        </ul>
+      <% end %>
+      <% if @auth_code_flow&.issuer == 'iugu' && @auth_code_flow&.refresh_token %>
+        <%= link_to('Get JWT (Refresh Token)', iugu_refresh_token_path, class: "btn btn-lg btn-light fw-bold border-white bg-white") %>
+      <% end %>
+      <% if @auth_code_flow&.issuer == 'iugu' && @auth_code_flow&.refresh_token %>
+        <p>Request Content</p>
+        <ul>
+          <li><span class="list-title">token_url:</span> <%= IuguController::IUGU_TOKEN_URL %></li>
+          <li><span class="list-title">client_id:</span> ***</li>
+          <li><span class="list-title">client_secret:</span> ***</li>
+          <li><span class="list-title">refresh_token:</span> <%= @auth_code_flow&.refresh_token %></li>
+          <li><span class="list-title">grant_type:</span> refresh_token</li>
         </ul>
       <% end %>
     </div>

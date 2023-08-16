@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_202136) do
     t.text "granted_scope"
     t.text "access_token"
     t.text "id_token"
+    t.text "refresh_token"
     t.text "auth_code_req_url"
     t.text "token_req_url"
     t.integer "expires_in"

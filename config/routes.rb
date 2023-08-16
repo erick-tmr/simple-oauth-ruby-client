@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/iugu-code', to: 'iugu#code'
   get '/iugu-callback', to: 'iugu#callback'
   get '/iugu-jwt', to: 'iugu#jwt'
+  get '/iugu-refresh-token', to: 'iugu#refresh_token'
 
   get '/iugu-apis', to: 'iugu_apis#index'
   get '/iugu-apis/workspaces', to: 'iugu_apis#get_workspaces'
