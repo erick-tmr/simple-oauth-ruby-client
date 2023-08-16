@@ -46,7 +46,6 @@ class IuguController < ApplicationController
       code: auth_code_flow.code,
       redirect_uri: CALLBACK_URL,
       grant_type: 'authorization_code'
-      # audience: 'Iugu.Platform.ok'
     }
 
     response = conn.post('', body)
@@ -56,6 +55,33 @@ class IuguController < ApplicationController
       access_token: parsed_response['access_token'],
       id_token: parsed_response['id_token'],
       expires_in: parsed_response['expires_in'],
+      refresh_token: parsed_response['refresh_token'],
+      token_req_url: response.env.request_body
+    )
+
+    redirect_to authorization_code_grant_path
+  end
+
+  def refresh_token
+    auth_code_flow = AuthCodeFlow.find(session[:auth_code_flow_id])
+    conn = Faraday.new(IUGU_TOKEN_URL) do |f|
+      f.request :authorization, :basic, ENV['IUGU_CLIENT_ID'], ENV['IUGU_CLIENT_SECRET']
+      f.request :url_encoded
+    end
+    body = {
+      refresh_token: auth_code_flow.refresh_token,
+      grant_type: 'refresh_token'
+    }
+
+    response = conn.post('', body)
+
+    parsed_response = JSON.parse(response.body)
+
+    auth_code_flow.update(
+      access_token: parsed_response['access_token'],
+      id_token: parsed_response['id_token'],
+      expires_in: parsed_response['expires_in'],
+      refresh_token: parsed_response['refresh_token'],
       token_req_url: response.env.request_body
     )
 
